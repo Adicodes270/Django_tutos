@@ -1,0 +1,4 @@
+Django==5.2.3
+django-crispy-forms==2.1
+crispy-bootstrap4==2022.1
+gunicorn==21.2.0       # Needed for deployment on Heroku, Render, Railway, etc.
