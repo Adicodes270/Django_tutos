@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Access Denied
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h2 class="text-danger">Access Denied</h2>
+    <p class="lead">🚫 This is not your list. It was created by another user.</p>
+    <p>You are not authorized to view or modify this to-do list.</p>
+    <a href="/home/" class="btn btn-primary mt-3">Back to Home</a>
+</div>
+{% endblock %}
