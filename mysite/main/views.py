@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .models import ToDoList, Item
 from .forms import CreateNewList
+from django.contrib.auth.decorators import login_required
 
 # View a specific ToDo list
 def index(response, id):
@@ -35,6 +36,9 @@ def home(response):
     return render(response, "main/home.html", {})
 
 # Create a new list
+
+
+@login_required
 def create(response):
     if response.method == "POST":
         form = CreateNewList(response.POST)
