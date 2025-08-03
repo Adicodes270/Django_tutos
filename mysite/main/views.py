@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .models import ToDoList, Item
 from .forms import CreateNewList
-from django.contrib.auth.decorators import login_required
+
 
 # View a specific ToDo list
 def index(response, id):
@@ -38,9 +38,12 @@ def home(response):
 # Create a new list
 
 
-@login_required
+
 def create(response):
     if response.method == "POST":
+        if not request.user.is_authenticated:
+            return HttpResponse("❌ You must be logged in to create a ToDo list.", status=403)
+
         form = CreateNewList(response.POST)
         if form.is_valid():
             name = form.cleaned_data["name"]
@@ -50,8 +53,9 @@ def create(response):
             return HttpResponseRedirect("/%i" % t.id)
     else:
         form = CreateNewList()
+        
+    return render(request, "main/not_allowed.html", {"message": "You must be logged in to create a ToDo list."})
 
-    return render(response, "main/create.html", {"form": form})
 
 # Static view page
 def view(response):
