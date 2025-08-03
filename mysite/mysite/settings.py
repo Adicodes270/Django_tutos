@@ -30,6 +30,8 @@ ALLOWED_HOSTS = ['todolist-django-project.onrender.com']
 CSRF_TRUSTED_ORIGINS = [
     "https://todolist-django-project.onrender.com"
 ]
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 
 
