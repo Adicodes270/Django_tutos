@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.shortcuts import render,redirect
+from django.http import HttpResponseRedirect,HttpResponse
 from .models import ToDoList, Item
 from .forms import CreateNewList
 
@@ -39,23 +39,23 @@ def home(response):
 
 
 
-def create(response):
-    if response.method == "POST":
+def create(request):
+    if request.method == "POST":
         if not request.user.is_authenticated:
             return HttpResponse("❌ You must be logged in to create a ToDo list.", status=403)
 
-        form = CreateNewList(response.POST)
+        form = CreateNewList(request.POST)
+
         if form.is_valid():
             name = form.cleaned_data["name"]
             t = ToDoList(name=name)
             t.save()
-            response.user.todolist.add(t)
-            return HttpResponseRedirect("/%i" % t.id)
+            request.user.todolist.add(t)
+            return redirect(f"/{t.id}")
     else:
         form = CreateNewList()
-        
-    return render(request, "main/create.html", {"form": form})
 
+    return render(request, "main/create.html", {"form": form})
 
 # Static view page
 def view(response):
