@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['todolist-django-project.onrender.com']
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://todolist-django-project.onrender.com"
+]
+
 
 
 # Application definition
