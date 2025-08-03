@@ -54,7 +54,7 @@ def create(response):
     else:
         form = CreateNewList()
         
-    return render(request, "main/not_allowed.html", {"message": "You must be logged in to create a ToDo list."})
+    return render(request, "main/create.html", {"form": form})
 
 
 # Static view page
